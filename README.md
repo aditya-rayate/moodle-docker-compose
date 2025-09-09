@@ -1,5 +1,12 @@
 # Moodle LMS on AWS with Docker Compose
 
+[![Docker](https://img.shields.io/badge/Docker-Compose-blue?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Moodle](https://img.shields.io/badge/Moodle-LMS-orange?logo=moodle&logoColor=white)](https://moodle.org/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.4.5-blue?logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Nginx](https://img.shields.io/badge/Nginx-Reverse_Proxy-green?logo=nginx&logoColor=white)](https://nginx.org/)
+[![Certbot](https://img.shields.io/badge/SSL-Let%E2%80%99s_Encrypt-yellow?logo=letsencrypt&logoColor=white)](https://letsencrypt.org/)
+[![AWS](https://img.shields.io/badge/AWS-EC2-orange?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/ec2/)
+
 This project deploys a **Moodle Learning Management System (LMS)** on an **AWS EC2 instance (t3.medium)** using Docker Compose. It was designed to support an online exam setup for **200–500 concurrent users**.
 
 The deployment includes a custom Moodle Docker image (built from the [Moodle Git repository](https://docs.moodle.org/500/en/Git_for_Administrators)), MySQL database, phpMyAdmin for database management, Nginx as a reverse proxy, and Let’s Encrypt SSL via Certbot.
@@ -94,7 +101,7 @@ In `compose.yml`, these files are mounted and read by MySQL and Moodle container
 
 ### Prerequisites
 
-* AWS EC2 **t3.medium** instance (Amazon Linux 2 recommended).
+* AWS EC2 **t3.medium** instance (Ubuntu 24).
 * **AmazonSSMManagedInstanceCore** IAM role attached to the instance profile (for Systems Manager Session Manager access instead of SSH).
 * Domain name pointing to EC2 public IP.
 * Docker & Docker Compose installed.
