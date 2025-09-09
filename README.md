@@ -23,7 +23,9 @@ This architecture ensures a **secure, scalable, and production-ready Moodle LMS*
 
 ## 🏗️ Architecture
 
-![Moodle Architecture](./architecture/moodle-arch.png?raw=true)
+The architecture of the deployment is documented in the [`architecture`](https://github.com/seunayolu/online-boutique/tree/main/architecture) folder
+
+![Moodle Architecture](https://github.com/seunayolu/moodle-docker-compose/blob/main/architecture/moodle-arch.png?raw=true)
 
 ## 📦 Services
 
