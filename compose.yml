@@ -1,0 +1,81 @@
+services:
+  moodle:
+    image: oluwaseuna/runmoodle:1.4
+    container_name: moodle
+    expose:
+      - "80"
+    volumes:
+      - moodleData:/var/www/moodledata
+    depends_on:
+      - moodleDB
+    environment:
+      MOODLE_DATABASE_HOST: moodleDB
+      MOODLE_DATABASE_USER: ${MYSQL_USER}
+      MOODLE_DATABASE_NAME: ${MYSQL_DATABASE}
+      MOODLE_DATABASE_PASSWORD_FILE: /run/secrets/db_password
+      MOODLE_WWWROOT: https://moodle.teachdev.online
+    secrets:
+      - db_password
+
+  moodleDB:
+    image: mysql:8.4.5
+    container_name: cloudDB
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+    volumes:
+      - cloudDBdata:/var/lib/mysql
+    secrets:
+      - db_root_password
+      - db_password
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyAdmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: moodleDB
+      PMA_PORT: 3306
+    depends_on:
+      - moodleDB
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    depends_on:
+      - moodleapp
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./letsencrypt:/etc/letsencrypt
+      - ./nginx/html:/var/www/html
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    depends_on:
+      - nginx
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+      - ./nginx/html:/var/www/html
+    entrypoint: >
+      sh -c "certbot certonly --webroot -w /var/www/html
+      -d moodle.teachdev.online
+      --email awscloudpros@gmail.com
+      --agree-tos --non-interactive"
+
+secrets:
+  db_root_password:
+    file: ./secrets/db_root_password.txt
+  db_password:
+    file: ./secrets/db_password.txt
+
+volumes:
+  moodleData:
+  cloudDBdata:
