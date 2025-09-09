@@ -23,7 +23,7 @@ This architecture ensures a **secure, scalable, and production-ready Moodle LMS*
 
 ## 🏗️ Architecture
 
-![Moodle Architecture](./architecture/moodle-arch.png)
+![Moodle Architecture](./architecture/moodle-arch.png?raw=true)
 
 ## 📦 Services
 
