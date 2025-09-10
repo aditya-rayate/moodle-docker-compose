@@ -1,6 +1,6 @@
 services:
   moodle:
-    image: oluwaseuna/runmoodle:1.4
+    image: oluwaseuna/runmoodle:1.7
     container_name: moodle
     expose:
       - "80"
@@ -9,7 +9,7 @@ services:
     depends_on:
       - moodleDB
     environment:
-      MOODLE_DATABASE_HOST: moodleDB
+      MOODLE_DATABASE_HOST: ${MYSQL_HOST}
       MOODLE_DATABASE_USER: ${MYSQL_USER}
       MOODLE_DATABASE_NAME: ${MYSQL_DATABASE}
       MOODLE_DATABASE_PASSWORD_FILE: /run/secrets/db_password
@@ -38,8 +38,8 @@ services:
     ports:
       - "8080:80"
     environment:
-      PMA_HOST: moodleDB
-      PMA_PORT: 3306
+      PMA_HOST: ${MYSQL_HOST}
+      PMA_PORT: ${MYSQL_PORT}
     depends_on:
       - moodleDB
 
