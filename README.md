@@ -13,7 +13,7 @@ The deployment includes a custom Moodle Docker image (built from the [Moodle Git
 
 ## 🚀 Project Overview
 
-* **Moodle Service**: Custom Docker image (`oluwaseuna/runmoodle:1.4`) with an `entrypoint.sh` script that dynamically generates `config.php` using environment variables and secret files.
+* **Moodle Service**: Custom Docker image (`oluwaseuna/runmoodle:1.7`) with an `entrypoint.sh` script that dynamically generates `config.php` using environment variables and secret files.
 * **Database**: MySQL 8.4.5 with persistent storage via Docker named volumes.
 * **phpMyAdmin**: Database management tool to interact with Moodle’s MySQL database.
 * **Nginx**: Reverse proxy with SSL termination.
@@ -25,7 +25,11 @@ This architecture ensures a **secure, scalable, and production-ready Moodle LMS*
 
 The architecture of the deployment is documented in the [`architecture`](https://github.com/seunayolu/moodle-docker-compose/tree/main/architecture) folder
 
-![Moodle Architecture](https://github.com/seunayolu/moodle-docker-compose/blob/main/architecture/moodle-arch.png?raw=true)
+## 🏗️ Architecture
+
+<p align="center">
+  <img src="https://github.com/seunayolu/moodle-docker-compose/blob/main/architecture/moodle-arch.png?raw=true" alt="Moodle Architecture" width="600"/>
+</p>
 
 ## 📦 Services
 
